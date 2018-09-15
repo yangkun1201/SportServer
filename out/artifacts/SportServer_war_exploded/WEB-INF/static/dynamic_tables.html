@@ -1,0 +1,514 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>S.R管理后台</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- STYLESHEETS --><!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+	<link rel="stylesheet" type="text/css" href="css/cloud-admin.css" >
+	<link rel="stylesheet" type="text/css"  href="css/themes/default.css" id="skin-switcher" >
+	<link rel="stylesheet" type="text/css"  href="css/responsive.css" >
+	
+	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<!-- JQUERY UI-->
+	<link rel="stylesheet" type="text/css" href="js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" />
+	<!-- DATE RANGE PICKER -->
+	<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+	<!-- DATA TABLES -->
+	<link rel="stylesheet" type="text/css" href="js/datatables/media/css/jquery.dataTables.min.css" />
+	<link rel="stylesheet" type="text/css" href="js/datatables/media/assets/css/datatables.min.css" />
+	<link rel="stylesheet" type="text/css" href="js/datatables/extras/TableTools/media/css/TableTools.min.css" />
+	<!-- FONTS -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+	<link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-grid.css" rel="stylesheet">
+	<style>
+		#form {
+			position: fixed;
+			z-index: 100;
+			/*background-color: red;*/
+			top: 300px;
+			left: 500px;
+			visibility: hidden;
+		}
+		table.dataTable td.center, table.dataTable td.dataTables_empty {
+			display: none;
+		}
+		#datatable2_filter {
+			display: none;
+		}
+		#datatable2_paginate{
+			display: none;
+		}
+		#datatable2_info{
+			display: none;
+		}
+		#ToolTables_datatable2_0,#ToolTables_datatable2_1 ,#ToolTables_datatable2_2 ,#ToolTables_datatable2_3 ,#ToolTables_datatable2_4{
+			display: none;
+		}
+		#datatable2_length{
+			display: none;
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<!-- HEADER -->
+	<header class="navbar clearfix" id="header">
+		<div class="container">
+				<div class="navbar-brand">
+					<!-- COMPANY LOGO -->
+
+						<img src="img/logo1.png" alt="Cloud Admin Logo" class="img-responsive" height="30" width="120">
+
+					<!-- /COMPANY LOGO -->
+					<!-- TEAM STATUS FOR MOBILE -->
+					<div class="visible-xs">
+						<a href="#" class="team-status-toggle switcher btn dropdown-toggle">
+							<i class="fa fa-users"></i>
+						</a>
+					</div>
+					<!-- /TEAM STATUS FOR MOBILE -->
+					<!-- SIDEBAR COLLAPSE -->
+					<div id="sidebar-collapse" class="sidebar-collapse btn">
+						<i class="fa fa-bars" 
+							data-icon1="fa fa-bars" 
+							data-icon2="fa fa-bars" ></i>
+					</div>
+					<!-- /SIDEBAR COLLAPSE -->
+				</div>
+				<!-- NAVBAR LEFT -->
+				<ul class="nav navbar-nav pull-left hidden-xs" id="navbar-left">
+					
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-cog"></i>
+							<span class="name">换个颜色</span>
+							<i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu skins">
+							<li class="dropdown-title">
+								<span><i class="fa fa-leaf"></i> Theme Skins</span>
+							</li>
+							<li><a href="#" data-skin="default">Subtle (default)</a></li>
+							<li><a href="#" data-skin="night">Night</a></li>
+							<li><a href="#" data-skin="earth">Earth</a></li>
+							<li><a href="#" data-skin="utopia">Utopia</a></li>
+							<li><a href="#" data-skin="nature">Nature</a></li>
+							<li><a href="#" data-skin="graphite">Graphite</a></li>
+						 </ul>
+					</li>
+				</ul>
+				<!-- /NAVBAR LEFT -->
+				<!-- BEGIN TOP NAVIGATION MENU -->					
+				<ul class="nav navbar-nav pull-right">
+					<!-- BEGIN NOTIFICATION DROPDOWN -->	
+					<li class="dropdown" id="header-notification">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-bell"></i>
+							<span class="badge">7</span>
+							
+						</a>
+						<ul class="dropdown-menu notification">
+							<li class="dropdown-title">
+								<span><i class="fa fa-bell"></i> 7 Notifications</span>
+							</li>
+							<li>
+								<a href="#">
+									<span class="label label-success"><i class="fa fa-user"></i></span>
+									<span class="body">
+										<span class="message">5 users online. </span>
+										<span class="time">
+											<i class="fa fa-clock-o"></i>
+											<span>Just now</span>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="label label-primary"><i class="fa fa-comment"></i></span>
+									<span class="body">
+										<span class="message">Martin commented.</span>
+										<span class="time">
+											<i class="fa fa-clock-o"></i>
+											<span>19 mins</span>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="label label-warning"><i class="fa fa-lock"></i></span>
+									<span class="body">
+										<span class="message">DW1 server locked.</span>
+										<span class="time">
+											<i class="fa fa-clock-o"></i>
+											<span>32 mins</span>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="label label-info"><i class="fa fa-twitter"></i></span>
+									<span class="body">
+										<span class="message">Twitter connected.</span>
+										<span class="time">
+											<i class="fa fa-clock-o"></i>
+											<span>55 mins</span>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="label label-danger"><i class="fa fa-heart"></i></span>
+									<span class="body">
+										<span class="message">Jane liked. </span>
+										<span class="time">
+											<i class="fa fa-clock-o"></i>
+											<span>2 hrs</span>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="label label-warning"><i class="fa fa-exclamation-triangle"></i></span>
+									<span class="body">
+										<span class="message">Database overload.</span>
+										<span class="time">
+											<i class="fa fa-clock-o"></i>
+											<span>6 hrs</span>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li class="footer">
+								<a href="#">See all notifications <i class="fa fa-arrow-circle-right"></i></a>
+							</li>
+						</ul>
+					</li>
+					<!-- END NOTIFICATION DROPDOWN -->
+					
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+					<li class="dropdown user" id="header-user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<img alt="" src="img/avatars/avatar3.jpg" />
+							<span class="username">John Doe</span>
+							<i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							
+							<li><a href="login.html"><i class="fa fa-power-off"></i>   注&nbsp;&nbsp;&nbsp;销</a></li>
+						</ul>
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+				</ul>
+				<!-- END TOP NAVIGATION MENU -->
+		</div>
+	</header>
+	<!--/HEADER -->
+	
+	<!-- PAGE -->
+	<section id="page">
+				<!-- SIDEBAR -->
+				<div id="sidebar" class="sidebar">
+					<div class="sidebar-menu nav-collapse">
+						<div class="divide-20"></div>
+						<!-- SEARCH BAR -->
+						<div id="search-bar">
+							<input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+						</div>
+						<!-- /SEARCH BAR -->
+						
+						<!-- SIDEBAR QUICK-LAUNCH -->
+						<!-- <div id="quicklaunch">
+						<!-- /SIDEBAR QUICK-LAUNCH -->
+						
+						<!-- SIDEBAR MENU -->
+						<ul>
+							<li class="active">
+								<a href="index.html">
+								<i class="fa fa-tachometer fa-fw"></i> <span class="menu-text">首页</span>
+								<span class="selected"></span>
+								</a>					
+							</li>
+							
+							<li class="has-sub">
+								<a href="javascript:;" class="">
+								<i class="fa fa-table fa-fw"></i> <span class="menu-text">学生信息管理</span>
+								<span class="arrow"></span>
+								</a>
+								<ul class="sub">
+									
+									<li><a class="" href="dynamic_tables.html"><span class="sub-menu-text">查看学生信息</span></a></li>
+									<li><a class="" href="jqgrid_plugin.html"><span class="sub-menu-text">修改学生信息</span></a></li>
+								</ul>
+							</li>
+							
+							<li class="has-sub">
+								<a href="javascript:;" class="">
+								<i class="fa fa-map-marker fa-fw"></i> <span class="menu-text">地图热点</span>
+								<span class="arrow"></span>
+								</a>
+								<ul class="sub">
+									<li><a class="" href="google_maps.html"><span class="sub-menu-text">在线学生位置</span></a></li>
+									
+								</ul>
+							</li>
+						</ul>
+						<!-- /SIDEBAR MENU -->
+					</div>
+				</div>
+				<!-- /SIDEBAR -->
+		<div id="main-content">
+			<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+			<div class="modal fade" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h4 class="modal-title">Box Settings</h4>
+					</div>
+					<div class="modal-body">
+					  Here goes box setting content.
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					  <button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
+			<div class="container">
+				<div class="row">
+					<div id="content" class="col-lg-12">
+						<!-- PAGE HEADER-->
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="page-header">
+									<!-- STYLER -->
+
+									<!-- /STYLER -->
+
+									<div class="clearfix">
+										<h3 class="content-title pull-left">学生信息</h3>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<!-- /PAGE HEADER -->
+						
+						
+						<div class="separator"></div>
+						<!-- EXPORT TABLES -->
+						<div class="row">
+							<div class="col-md-12">
+								<!-- BOX -->
+								<div class="box border purple">
+									<div class="box-title">
+										<h4><i class="fa fa-table"></i>学生信息表</h4>
+										<div class="tools hidden-xs">
+											<a href="#box-config" data-toggle="modal" class="config">
+												<i class="fa fa-cog"></i>
+											</a>
+											<a href="javascript:;" class="reload">
+												<i class="fa fa-refresh"></i>
+											</a>
+											<a href="javascript:;" class="collapse">
+												<i class="fa fa-chevron-up"></i>
+											</a>
+											<a href="javascript:;" class="remove">
+												<i class="fa fa-times"></i>
+											</a>
+										</div>
+									</div>
+									<div class="box-body">
+										<table id="datatable2" cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>排名</th>
+													<th>学号</th>
+													<th class="hidden-xs">姓名</th>
+													<th>积分</th>
+													<th class="hidden-xs">电话</th>
+													<th>修改</th>
+													<th>删除</th>
+												</tr>
+											</thead>
+											<tbody id="app-1">
+												<tr class="gradeA" v-for="todo in todos">
+													<td >{{todo.ranking}}</td>
+													<td >{{todo.id}}</td>
+													<td >{{todo.name}}</td>
+													<td >{{todo.score}}</td>
+													<td >{{todo.tel}}</td>
+													<td ><button onclick="changeInfo(this)">修改信息</button></td>
+													<td ><button onclick="deleteUser(this)">删除用户</button></td>
+												</tr>
+
+											</tbody>
+											<div id="form">
+												<div class="input-group">
+													<span class="input-group-addon">学号</span>
+													<input id="sid" type="text"  style="width: 300px" class="form-control" aria-describedby="sizing-addon2">
+												</div>
+												<div class="input-group">
+													<span class="input-group-addon" >姓名</span>
+													<input id="name" type="text" style="width: 300px" class="form-control" aria-describedby="sizing-addon2">
+												</div>
+												<div class="input-group">
+													<span class="input-group-addon">积分</span>
+													<input id="score" type="text" style="width: 300px" class="form-control" aria-describedby="sizing-addon2">
+												</div>
+												<div class="input-group">
+													<span class="input-group-addon">电话</span>
+													<input id="tel" type="text" style="width: 300px" class="form-control" aria-describedby="sizing-addon2">
+												</div>
+												<button onclick="submit()" class="btn btn-default navbar-btn" style="margin-left:160px;">确认</button><br>
+											</div>
+											<script src="js/jquery/jquery-2.0.3.min.js"></script>
+											<script>
+												var content = "";
+
+                                                var app1 = new Vue({
+                                                    el: '#app-1',
+                                                    data: {
+                                                        todos: content
+                                                    },
+                                                    mounted:function () {
+
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            crossDomain:true,
+                                                            url:  'http://120.79.36.200:8080/SportServer_war/getUsersInfo',
+                                                            success: function(data){
+                                                                app1.todos = data;
+                                                                console.log(app1.todos);
+                                                            }
+                                                        });
+                                                    }
+                                                })
+
+												function changeInfo(obj) {
+                                                    var form = document.getElementById('form')
+													var sid = obj.parentNode.parentNode.children[1].innerHTML
+                                                    var name = obj.parentNode.parentNode.children[2].innerHTML
+                                                    var score = obj.parentNode.parentNode.children[3].innerHTML
+                                                    var tel = obj.parentNode.parentNode.children[4].innerHTML
+                                                    // $(location).attr('href', 'changeInfo.html');
+                                                    form.style.visibility = 'visible'
+                                                    document.getElementById('sid').readOnly=true
+                                                    document.getElementById('sid').value=sid
+                                                    document.getElementById('name').value=name
+                                                    document.getElementById('score').value=score
+                                                    document.getElementById('tel').value=tel
+													console.log(form)
+
+                                                }
+
+                                                function submit(){
+                                                    var sid = $('#sid').val()
+                                                    var name = $('#name').val()
+                                                    var score = $('#score').val()
+                                                    var tel = $('#tel').val()
+                                                    console.log(sid)
+                                                    console.log(name)
+                                                    console.log(score)
+                                                    console.log(tel)
+                                                    var content = {"id":sid,"name":name,"score":score,"tel":tel}
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        crossDomain:true,
+                                                        contentType : "application/json",
+                                                        url:  'http://120.79.36.200:8080/SportServer_war/changeInfo',
+                                                        data:JSON.stringify(content),
+                                                        success: function(data){
+                                                            console.log(data)
+                                                            alert('修改成功')
+                                                            form.style.visibility = 'hidden'
+                                                            $(location).attr('href', 'dynamic_tables.html');
+                                                        }
+                                                    });
+                                                }
+
+                                                function deleteUser(obj) {
+                                                    var curLine = obj.parentNode.parentNode
+                                                    var sid = curLine.children[1].innerHTML
+													var table =  obj.parentNode.parentNode.parentNode
+													console.log(table)
+                                                    table.removeChild(curLine)
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        crossDomain:true,
+                                                        url:  'http://120.79.36.200:8080/SportServer_war/deleteUserById?id='+sid,
+                                                        success: function(data){
+                                                            alert('已删除')
+                                                            obj.parentNode.parentNode.fadeOut();
+                                                        }
+                                                    });
+
+                                                }
+
+											</script>
+										</table>
+									</div>
+								</div>
+								<!-- /BOX -->
+							</div>
+						</div>
+						<!-- /EXPORT TABLES -->
+						<div class="footer-tools">
+							<span class="go-top">
+								<i class="fa fa-chevron-up"></i> 回到顶部
+							</span>
+						</div>
+					</div><!-- /CONTENT-->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/PAGE -->
+	<!-- JAVASCRIPTS -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- JQUERY -->
+	<script src="js/jquery/jquery-2.0.3.min.js"></script>
+	<!-- JQUERY UI-->
+	<script src="js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<!-- BOOTSTRAP -->
+	<script src="bootstrap-dist/js/bootstrap.min.js"></script>
+	
+		
+	<!-- DATE RANGE PICKER -->
+	<script src="js/bootstrap-daterangepicker/moment.min.js"></script>
+	
+	<script src="js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+	<!-- SLIMSCROLL -->
+	<script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script><script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js"></script>
+	<!-- BLOCK UI -->
+	<script type="text/javascript" src="js/jQuery-BlockUI/jquery.blockUI.min.js"></script>
+	<!-- DATA TABLES -->
+	<script type="text/javascript" src="js/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="js/datatables/media/assets/js/datatables.min.js"></script>
+	<script type="text/javascript" src="js/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
+	<script type="text/javascript" src="js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js"></script>
+	<!-- COOKIE -->
+	<script type="text/javascript" src="js/jQuery-Cookie/jquery.cookie.min.js"></script>
+	<!-- CUSTOM SCRIPT -->
+	<script src="js/script.js"></script>
+	<script>
+		jQuery(document).ready(function() {		
+			App.setPage("dynamic_table");  //Set current page
+			App.init(); //Initialise plugins and elements
+		});
+
+	</script>
+	<!-- /JAVASCRIPTS -->
+</body>
+</html>

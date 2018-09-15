@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.tzc.yk.mapper.RunDataMapper">
+
+    <insert id="AddRunData" parameterType="RunData">
+        insert into RunData VALUES (#{id},#{password},#{sportsType},#{startTime},#{totalTime},#{totalDistance},#{calories},#{timePerKM},#{stepCount},#{mCurrentLat},#{mCurrentLon})
+    </insert>
+
+    <select id="getHomeData" parameterType="String" resultType="RunData">
+        select * from RunData where id = #{VALUE} ORDER BY startTime desc;
+    </select>
+
+    <select id="getUserInfo" resultType="UserInfo">
+        select User.id,User.name,User.tel,Score.score from User left join Score on User.id = Score.id;
+    </select>
+
+    <delete id="deleteById" parameterType="String">
+        delete from RunData where id = #{VALUE}
+    </delete>
+
+    <select id="getCalendarData" parameterType="String" resultType="RunData">
+        select * from RunData where id = #{VALUE} ORDER by startTime DESC;
+    </select>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.tzc.yk.mapper.CommodityMapper">
+
+    <select id="getCommodities" resultType="Commodity">
+        select * from commodity;
+    </select>
+    <select id="getCommodityById" parameterType="int" resultType="Commodity">
+        select * from commodity where id = #{VALUE}
+    </select>
+
+    <insert id="addConsumpHistory">
+        insert into comsumehistory VALUES (#{sid},#{cid},#{btime})
+    </insert>
+
+    <select id="getConsumpHistoryById" resultType="CommodityHistory">
+        select * from comsumehistory where sid = #{sid}
+    </select>
+
+</mapper>

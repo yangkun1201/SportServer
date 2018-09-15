@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>changeInfo</title>
+    <script src="js/jquery/jquery-2.0.3.min.js"></script>
+</head>
+<body>
+    <div id="form">
+        学号：<input type="text" id="sid"><br>
+        姓名：<input type="text" id="name"><br>
+        积分：<input type="text" id="score"><br>
+        电话：<input type="text" id="tel"><br>
+        <button onclick="submit()">确认</button><br>
+    </div>
+    <script>
+        function submit(){
+            var sid = $('#sid').val()
+            var name = $('#name').val()
+            var score = $('#score').val()
+            var tel = $('#tel').val()
+            console.log(sid)
+            console.log(name)
+            console.log(score)
+            console.log(tel)
+            var content = {"id":sid,"name":name,"score":score,"tel":tel}
+            $.ajax({
+                type: "POST",
+                crossDomain:true,
+                contentType : "application/json",
+                url:  'http://127.0.0.1:8080/SportServer/changeInfo',
+                data:JSON.stringify(content),
+                success: function(data){
+                   console.log(data)
+                   alert('修改成功')
+                    $(location).attr('href', 'dynamic_tables.html');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
